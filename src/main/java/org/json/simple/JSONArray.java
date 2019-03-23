@@ -9,6 +9,7 @@ import org.json.simple.writer.JSONWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
+import org.json.simple.parser.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -51,8 +52,8 @@ public class JSONArray<T> extends ArrayList<T> implements JSONAware, JSONStreamA
 	 * Allows creation of a JSONArray from a String.
 	 * @param str
 	 */
-	public JSONArray(String str) {
-		this(str, true);
+	public static JSONArray of(String str) {
+		return of(str, true);
 	}
 
 	/**
@@ -60,17 +61,17 @@ public class JSONArray<T> extends ArrayList<T> implements JSONAware, JSONStreamA
 	 * @param str
 	 * @param nullOnFail
 	 */
-	public JSONObject(String str, boolean nullOnFail) {
+	public static JSONArray of(String str, boolean nullOnFail) {
 		try {
 			return (JSONArray) JSONValue.parseWithException(str);
-		} catch (IOException | ParseException e) {
+		} catch (ParseException e) {
 			if (nullOnFail) {
 				return null;
 			} else {
 				return new JSONArray();
 			}
 		}
-	}
+    }
 
 	public void writeJSONString(Writer out) throws IOException {
 		JSONWriter.writeJSONString(this, out);

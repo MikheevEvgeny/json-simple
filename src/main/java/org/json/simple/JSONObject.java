@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+import org.json.simple.parser.ParseException;
 
 /**
  * A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
@@ -57,8 +58,8 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 * Allows creation of a JSONObject from a String.
 	 * @param str
 	 */
-	public JSONObject(String str) {
-		this(str, true);
+	public static JSONObject of(String str) {
+        return of(str, true);
 	}
 
 	/**
@@ -66,10 +67,10 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 * @param str
 	 * @param nullOnFail
 	 */
-	public JSONObject(String str, boolean nullOnFail) {
+	public static JSONObject of(String str, boolean nullOnFail) {
 		try {
 			return (JSONObject) JSONValue.parseWithException(str);
-		} catch (IOException | ParseException e) {
+		} catch (ParseException e) {
 			if (nullOnFail) {
 				return null;
 			} else {
