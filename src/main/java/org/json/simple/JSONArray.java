@@ -47,6 +47,31 @@ public class JSONArray<T> extends ArrayList<T> implements JSONAware, JSONStreamA
 	}
 
 
+	/**
+	 * Allows creation of a JSONArray from a String.
+	 * @param str
+	 */
+	public JSONArray(String str) {
+		this(str, true);
+	}
+
+	/**
+	 * Allows creation of a JSONArray from a String.
+	 * @param str
+	 * @param nullOnFail
+	 */
+	public JSONObject(String str, boolean nullOnFail) {
+		try {
+			return (JSONArray) JSONValue.parseWithException(str);
+		} catch (IOException | ParseException e) {
+			if (nullOnFail) {
+				return null;
+			} else {
+				return new JSONArray();
+			}
+		}
+	}
+
 	public void writeJSONString(Writer out) throws IOException {
 		JSONWriter.writeJSONString(this, out);
 	}

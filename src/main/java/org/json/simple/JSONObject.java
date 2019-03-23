@@ -53,6 +53,30 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 		super(map);
 	}
 
+	/**
+	 * Allows creation of a JSONObject from a String.
+	 * @param str
+	 */
+	public JSONObject(String str) {
+		this(str, true);
+	}
+
+	/**
+	 * Allows creation of a JSONObject from a String.
+	 * @param str
+	 * @param nullOnFail
+	 */
+	public JSONObject(String str, boolean nullOnFail) {
+		try {
+			return (JSONObject) JSONValue.parseWithException(str);
+		} catch (IOException | ParseException e) {
+			if (nullOnFail) {
+				return null;
+			} else {
+				return new JSONObject();
+			}
+		}
+	}
 
 	/**
 	 * Return value typed as T. If value is null or cast exception return default value
