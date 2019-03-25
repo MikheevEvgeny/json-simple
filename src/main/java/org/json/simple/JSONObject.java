@@ -1,13 +1,14 @@
 package org.json.simple;
 
+import org.json.simple.reader.JSONReader;
 import org.json.simple.writer.JSONWriter;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
+import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.Map;
-import org.json.simple.parser.ParseException;
 
 /**
  * A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
@@ -54,29 +55,14 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 		super(map);
 	}
 
-	/**
-	 * Allows creation of a JSONObject from a String.
-	 * @param str
-	 */
-	public static JSONObject of(String str) {
-        return of(str, true);
-	}
 
 	/**
-	 * Allows creation of a JSONObject from a String.
-	 * @param str
-	 * @param nullOnFail
+	 * Constructs a JSONObject from json string. If parse failed, constructs empty object
+	 *
+	 * @param string source json string
 	 */
-	public static JSONObject of(String str, boolean nullOnFail) {
-		try {
-			return (JSONObject) JSONValue.parseWithException(str);
-		} catch (ParseException e) {
-			if (nullOnFail) {
-				return null;
-			} else {
-				return new JSONObject();
-			}
-		}
+	public JSONObject(String string) {
+		this(JSONReader.readObject(string, false));
 	}
 
 	/**
@@ -99,8 +85,16 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 		JSONWriter.writeJSONString(this, out);
 	}
 
+	public void writeJSONString(Writer out, DateFormat dateFormat) throws IOException {
+		JSONWriter.writeJSONString(this, out, dateFormat);
+	}
+
 	public String toJSONString() {
 		return JSONWriter.toJSONString(this);
+	}
+
+	public String toJSONString(DateFormat dateFormat) {
+		return JSONWriter.toJSONString(this, dateFormat);
 	}
 
 	public String toString() {

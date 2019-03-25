@@ -5,12 +5,13 @@ import org.json.simple.JSONValue;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Convert array to string
+ * Convert JSONAware to string
  *
  * @author Evgeny Mikheev
  */
@@ -19,15 +20,29 @@ public class JSONWriter {
 	 * Convert a list to JSON text. The result is a JSON array.
 	 * If this list is also a JSONAware, JSONAware specific behaviours will be omitted at this top level.
 	 *
-	 * @param collection
+	 * @param collection source collection
 	 * @return JSON text, or "null" if list is null.
-	 * @see org.json.simple.JSONValue#toJSONString(Object)
+	 * @see org.json.simple.JSONValue#toJSONString(Object, DateFormat)
 	 */
 	public static String toJSONString(Collection collection) {
+		return toJSONString(collection, null);
+	}
+
+
+	/**
+	 * Convert a list to JSON text. The result is a JSON array.
+	 * If this list is also a JSONAware, JSONAware specific behaviours will be omitted at this top level.
+	 *
+	 * @param collection source collection
+	 * @param dateFormat format for converting dates to string
+	 * @return JSON text, or "null" if list is null.
+	 * @see org.json.simple.JSONValue#toJSONString(Object, DateFormat)
+	 */
+	public static String toJSONString(Collection collection, DateFormat dateFormat) {
 		final StringWriter writer = new StringWriter();
 
 		try {
-			writeJSONString(collection, writer);
+			writeJSONString(collection, writer, dateFormat);
 			return writer.toString();
 		} catch (IOException e) {
 			// This should never happen for a StringWriter
@@ -39,15 +54,28 @@ public class JSONWriter {
 	 * Convert a map to JSON text. The result is a JSON object.
 	 * If this map is also a JSONAware, JSONAware specific behaviours will be omitted at this top level.
 	 *
-	 * @param map
+	 * @param map source map
 	 * @return JSON text, or "null" if map is null.
-	 * @see org.json.simple.JSONValue#toJSONString(Object)
+	 * @see org.json.simple.JSONValue#toJSONString(Object, DateFormat)
 	 */
 	public static String toJSONString(Map map) {
+		return toJSONString(map, null);
+	}
+
+	/**
+	 * Convert a map to JSON text. The result is a JSON object.
+	 * If this map is also a JSONAware, JSONAware specific behaviours will be omitted at this top level.
+	 *
+	 * @param map        source map
+	 * @param dateFormat format for converting dates to string
+	 * @return JSON text, or "null" if map is null.
+	 * @see org.json.simple.JSONValue#toJSONString(Object, DateFormat)
+	 */
+	public static String toJSONString(Map map, DateFormat dateFormat) {
 		final StringWriter writer = new StringWriter();
 
 		try {
-			writeJSONString(map, writer);
+			writeJSONString(map, writer, dateFormat);
 			return writer.toString();
 		} catch (IOException e) {
 			// This should never happen with a StringWriter
@@ -217,11 +245,24 @@ public class JSONWriter {
 	 * Encode a list into JSON text and write it to out.
 	 * If this list is also a JSONStreamAware or a JSONAware, JSONStreamAware and JSONAware specific behaviours will be ignored at this top level.
 	 *
-	 * @param collection
-	 * @param out
-	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer)
+	 * @param collection source collection
+	 * @param out        output writer
+	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <T> void writeJSONString(Collection<T> collection, Writer out) throws IOException {
+		writeJSONString(collection, out, null);
+	}
+
+	/**
+	 * Encode a list into JSON text and write it to out.
+	 * If this list is also a JSONStreamAware or a JSONAware, JSONStreamAware and JSONAware specific behaviours will be ignored at this top level.
+	 *
+	 * @param collection source collection
+	 * @param out        output writer
+	 * @param dateFormat format for converting dates to string
+	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
+	 */
+	public static <T> void writeJSONString(Collection<T> collection, Writer out, DateFormat dateFormat) throws IOException {
 		if (collection == null) {
 			out.write("null");
 			return;
@@ -243,7 +284,7 @@ public class JSONWriter {
 				continue;
 			}
 
-			JSONValue.writeJSONString(value, out);
+			JSONValue.writeJSONString(value, out, dateFormat);
 		}
 		out.write(']');
 	}
@@ -253,11 +294,25 @@ public class JSONWriter {
 	 * Encode a map into JSON text and write it to out.
 	 * If this map is also a JSONAware or JSONStreamAware, JSONAware or JSONStreamAware specific behaviours will be ignored at this top level.
 	 *
-	 * @param map
-	 * @param out
-	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer)
+	 * @param map source map
+	 * @param out output writer
+	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <K, V> void writeJSONString(Map<K, V> map, Writer out) throws IOException {
+		writeJSONString(map, out, null);
+	}
+
+
+	/**
+	 * Encode a map into JSON text and write it to out.
+	 * If this map is also a JSONAware or JSONStreamAware, JSONAware or JSONStreamAware specific behaviours will be ignored at this top level.
+	 *
+	 * @param map        source map
+	 * @param out        output writer
+	 * @param dateFormat format for converting dates to string
+	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
+	 */
+	public static <K, V> void writeJSONString(Map<K, V> map, Writer out, DateFormat dateFormat) throws IOException {
 		if (map == null) {
 			out.write("null");
 			return;
@@ -277,7 +332,7 @@ public class JSONWriter {
 			out.write(JSONValue.escape(String.valueOf(entry.getKey())));
 			out.write('\"');
 			out.write(':');
-			JSONValue.writeJSONString(entry.getValue(), out);
+			JSONValue.writeJSONString(entry.getValue(), out, dateFormat);
 		}
 		out.write('}');
 	}

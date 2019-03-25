@@ -4,12 +4,13 @@
  */
 package org.json.simple;
 
+import org.json.simple.reader.JSONReader;
 import org.json.simple.writer.JSONWriter;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
-import org.json.simple.parser.ParseException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -47,38 +48,30 @@ public class JSONArray<T> extends ArrayList<T> implements JSONAware, JSONStreamA
 		super(c);
 	}
 
-
 	/**
-	 * Allows creation of a JSONArray from a String.
-	 * @param str
+	 * Constructs a JSONArray from json string. If parse failed, constructs empty array
+	 *
+	 * @param string source json string
 	 */
-	public static JSONArray of(String str) {
-		return of(str, true);
+	public JSONArray(String string) {
+		this(JSONReader.readArray(string, false));
 	}
 
-	/**
-	 * Allows creation of a JSONArray from a String.
-	 * @param str
-	 * @param nullOnFail
-	 */
-	public static JSONArray of(String str, boolean nullOnFail) {
-		try {
-			return (JSONArray) JSONValue.parseWithException(str);
-		} catch (ParseException e) {
-			if (nullOnFail) {
-				return null;
-			} else {
-				return new JSONArray();
-			}
-		}
-    }
 
 	public void writeJSONString(Writer out) throws IOException {
 		JSONWriter.writeJSONString(this, out);
 	}
 
+	public void writeJSONString(Writer out, DateFormat dateFormat) throws IOException {
+		JSONWriter.writeJSONString(this, out, dateFormat);
+	}
+
 	public String toJSONString() {
 		return JSONWriter.toJSONString(this);
+	}
+
+	public String toJSONString(DateFormat dateFormat) {
+		return JSONWriter.toJSONString(this, dateFormat);
 	}
 
 	/**

@@ -6,16 +6,20 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.writer.JSONWriter;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
-
-// import java.util.List;
-
 
 /**
  * @author FangYidong<fangyidong @ yahoo.com.cn>
  */
 public class JSONValue {
+
+	private static DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", new Locale("ru", "RU"));
+
 	/**
 	 * Parse JSON text into java object from the input source.
 	 * Please use parseWithException() if you don't want to ignore the exception.
@@ -101,10 +105,10 @@ public class JSONValue {
 	 *
 	 * @param value
 	 * @param out
-	 * @see org.json.simple.writer.JSONWriter#writeJSONString(Map, Writer)
+	 * @see org.json.simple.writer.JSONWriter#writeJSONString(Map, Writer, DateFormat)
 	 * @see org.json.simple.writer.JSONWriter#writeJSONString(Collection, Writer)
 	 */
-	public static void writeJSONString(Object value, Writer out) throws IOException {
+	public static void writeJSONString(Object value, Writer out, DateFormat dateFormat) throws IOException {
 		if (value == null) {
 			out.write("null");
 			return;
@@ -115,6 +119,12 @@ public class JSONValue {
 			out.write(escape((String) value));
 			out.write('\"');
 			return;
+		}
+
+		if (value instanceof Date) {
+			out.write('\"');
+			out.write(escape(dateFormat != null ? dateFormat.format(value) : DEFAULT_DATE_FORMAT.format(value)));
+			out.write('\"');
 		}
 
 		if (value instanceof Double) {
@@ -154,7 +164,7 @@ public class JSONValue {
 		}
 
 		if (value instanceof Map) {
-			JSONWriter.writeJSONString((Map) value, out);
+			JSONWriter.writeJSONString((Map) value, out, dateFormat);
 			return;
 		}
 
@@ -211,6 +221,11 @@ public class JSONValue {
 		out.write(value.toString());
 	}
 
+
+	public static void writeJSONString(Object value, Writer out) throws IOException {
+		writeJSONString(value, out, DEFAULT_DATE_FORMAT);
+	}
+
 	/**
 	 * Convert an object to JSON text.
 	 * <p>
@@ -225,10 +240,14 @@ public class JSONValue {
 	 * @see org.json.simple.writer.JSONWriter#toJSONString(Collection)
 	 */
 	public static String toJSONString(Object value) {
+		return toJSONString(value, DEFAULT_DATE_FORMAT);
+	}
+
+	public static String toJSONString(Object value, DateFormat dateFormat) {
 		final StringWriter writer = new StringWriter();
 
 		try {
-			writeJSONString(value, writer);
+			writeJSONString(value, writer, dateFormat);
 			return writer.toString();
 		} catch (IOException e) {
 			// This should never happen for a StringWriter
@@ -301,4 +320,7 @@ public class JSONValue {
 		}//for
 	}
 
+	public static void setDefaultDateFormat(@NotNull DateFormat defaultDateFormat) {
+		DEFAULT_DATE_FORMAT = defaultDateFormat;
+	}
 }

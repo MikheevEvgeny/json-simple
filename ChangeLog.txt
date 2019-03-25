@@ -1,4 +1,13 @@
 ChangeLog
+Version 1.2.1 (2019/03/25)
+* Added JSONReader
+* Added date to string case in writeJSONString
+
+Version 1.2 (2019/03/20)
+* JSONArray and JSONValue generify
+* Added JSONWriter
+* Java version set to 1.8
+* Small API reorganization
 
 Version 1.1.1 (2012/01/29)
 * Supports OSGi
