@@ -1,4 +1,8 @@
 ChangeLog
+Version 1.2.1 (2019/03/27)
+* Added universal read method to JSONReader
+* Bug fixes
+
 Version 1.2.1 (2019/03/25)
 * Added JSONReader
 * Added date to string case in writeJSONString

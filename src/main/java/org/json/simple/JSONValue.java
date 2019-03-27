@@ -125,6 +125,7 @@ public class JSONValue {
 			out.write('\"');
 			out.write(escape(dateFormat != null ? dateFormat.format(value) : DEFAULT_DATE_FORMAT.format(value)));
 			out.write('\"');
+			return;
 		}
 
 		if (value instanceof Double) {

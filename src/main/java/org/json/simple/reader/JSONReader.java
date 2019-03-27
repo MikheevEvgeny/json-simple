@@ -1,6 +1,7 @@
 package org.json.simple.reader;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
@@ -11,6 +12,38 @@ import org.json.simple.parser.ParseException;
  * @author Evgeny Mikheev, Dmitry Gourjev
  */
 public class JSONReader {
+	/**
+	 * Read string into JSON aware
+	 *
+	 * @param string source string
+	 * @return JSONAware if parsing successed, null otherwise
+	 */
+	public static JSONAware read(String string) {
+		return read(string, true);
+	}
+
+	/**
+	 * Read string into JSON aware
+	 *
+	 * @param string     source string
+	 * @param nullOnFail returns null if can't parse
+	 * @return JSONAware if parsing successed, null or empty object|array (according to nullOnFail flag) otherwise
+	 */
+	public static JSONAware read(String string, boolean nullOnFail) {
+		if (string == null) {
+			return nullOnFail ? null : new JSONObject<String, Object>();
+		}
+
+		string = string.trim();
+		if (string.matches("\\[(.*)\\]")) {
+			return readArray(string, nullOnFail);
+		} else if (string.matches("\\{(.*)\\}")) {
+			return readObject(string, nullOnFail);
+		} else {
+			return nullOnFail ? null : new JSONObject<String, Object>();
+		}
+	}
+
 	/**
 	 * Read string into JSON array
 	 *

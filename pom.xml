@@ -4,7 +4,7 @@
 	<artifactId>json-simple</artifactId>
 	<packaging>bundle</packaging>
 	<name>JSON.simple</name>
-	<version>1.2.1</version>
+	<version>1.2.2</version>
 	<description>A simple Java toolkit for JSON</description>
 	<url>http://code.google.com/p/json-simple/</url>
 	<licenses>
@@ -23,12 +23,25 @@
 			</roles>
 			<timezone>+8</timezone>
 		</developer>
+		<developer>
+			<id>Mikheev</id>
+			<name>Evgeny Mikheev</name>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+3</timezone>
+		</developer>
+		<developer>
+			<id>Gourjev</id>
+			<name>Dmitry Gourjev</name>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+3</timezone>
+		</developer>
 	</developers>
-	<scm>
-		<connection>scm:svn:http://json-simple.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:http://json-simple.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://json-simple.googlecode.com/svn/trunk/</url>
-	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
