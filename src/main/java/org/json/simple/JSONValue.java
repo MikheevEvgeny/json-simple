@@ -1,6 +1,5 @@
 package org.json.simple;
 
-import com.sun.istack.internal.NotNull;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.json.simple.writer.JSONWriter;
@@ -14,7 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * @author FangYidong<fangyidong @ yahoo.com.cn>
+ * @author FangYidong
  */
 public class JSONValue {
 
@@ -24,7 +23,7 @@ public class JSONValue {
 	 * Parse JSON text into java object from the input source.
 	 * Please use parseWithException() if you don't want to ignore the exception.
 	 *
-	 * @param in
+	 * @param in input
 	 * @return Instance of the following:
 	 * org.json.simple.JSONObject,
 	 * org.json.simple.JSONArray,
@@ -51,7 +50,7 @@ public class JSONValue {
 	 * Parse JSON text into java object from the given string.
 	 * Please use parseWithException() if you don't want to ignore the exception.
 	 *
-	 * @param s
+	 * @param s input string
 	 * @return Instance of the following:
 	 * org.json.simple.JSONObject,
 	 * org.json.simple.JSONArray,
@@ -73,7 +72,7 @@ public class JSONValue {
 	/**
 	 * Parse JSON text into java object from the input source.
 	 *
-	 * @param in
+	 * @param in input
 	 * @return Instance of the following:
 	 * org.json.simple.JSONObject,
 	 * org.json.simple.JSONArray,
@@ -81,8 +80,8 @@ public class JSONValue {
 	 * java.lang.Number,
 	 * java.lang.Boolean,
 	 * null
-	 * @throws IOException
-	 * @throws ParseException
+	 * @throws IOException    Something went wrong
+	 * @throws ParseException Something went wrong
 	 * @see org.json.simple.parser.JSONParser
 	 */
 	public static Object parseWithException(Reader in) throws IOException, ParseException {
@@ -103,8 +102,10 @@ public class JSONValue {
 	 * DO NOT call this method from writeJSONString(Writer) of a class that implements both JSONStreamAware and (Map or List) with
 	 * "this" as the first parameter, use JSONObject.writeJSONString(Map, Writer) or JSONArray.writeJSONString(List, Writer) instead.
 	 *
-	 * @param value
-	 * @param out
+	 * @param value      source value
+	 * @param out        write result to
+	 * @param dateFormat format for converting dates to string
+	 * @throws IOException write errors
 	 * @see org.json.simple.writer.JSONWriter#writeJSONString(Map, Writer, DateFormat)
 	 * @see org.json.simple.writer.JSONWriter#writeJSONString(Collection, Writer)
 	 */
@@ -235,7 +236,7 @@ public class JSONValue {
 	 * DO NOT call this method from toJSONString() of a class that implements both JSONAware and Map or List with
 	 * "this" as the parameter, use JSONObject.toJSONString(Map) or JSONArray.toJSONString(List) instead.
 	 *
-	 * @param value
+	 * @param value source value
 	 * @return JSON text, or "null" if value is null or it's an NaN or an INF number.
 	 * @see org.json.simple.writer.JSONWriter#toJSONString(Map)
 	 * @see org.json.simple.writer.JSONWriter#toJSONString(Collection)
@@ -259,8 +260,8 @@ public class JSONValue {
 	/**
 	 * Escape quotes, \, /, \r, \n, \b, \f, \t and other control characters (U+0000 through U+001F).
 	 *
-	 * @param s
-	 * @return
+	 * @param s source string
+	 * @return escaped string
 	 */
 	public static String escape(String s) {
 		if (s == null)
@@ -273,10 +274,10 @@ public class JSONValue {
 	/**
 	 * Escaping input and appending to output
 	 *
-	 * @param s  - input string
+	 * @param s  input string
 	 * @param sb output buffer
 	 */
-	static void escape(@NotNull String s, StringBuffer sb) {
+	static void escape(String s, StringBuffer sb) {
 		final int len = s.length();
 		for (int i = 0; i < len; i++) {
 			char ch = s.charAt(i);
@@ -321,7 +322,7 @@ public class JSONValue {
 		}//for
 	}
 
-	public static void setDefaultDateFormat(@NotNull DateFormat defaultDateFormat) {
+	public static void setDefaultDateFormat(DateFormat defaultDateFormat) {
 		DEFAULT_DATE_FORMAT = defaultDateFormat;
 	}
 }

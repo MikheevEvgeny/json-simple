@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Parser for JSON text. Please note that JSONParser is NOT thread-safe.
  *
- * @author FangYidong<fangyidong @ yahoo.com.cn>
+ * @author FangYidong
  */
 public class JSONParser {
 	public static final int S_INIT = 0;
@@ -54,8 +54,6 @@ public class JSONParser {
 	 * Reset the parser to the initial state with a new character reader.
 	 *
 	 * @param in - The new character reader.
-	 * @throws IOException
-	 * @throws ParseException
 	 */
 	public void reset(Reader in) {
 		lexer.yyreset(in);
@@ -92,7 +90,7 @@ public class JSONParser {
 	/**
 	 * Parse JSON text into java object from the input source.
 	 *
-	 * @param in
+	 * @param in input
 	 * @param containerFactory - Use this factory to createyour own JSON object and JSON array containers.
 	 * @return Instance of the following:
 	 * org.json.simple.JSONObject,
@@ -101,8 +99,8 @@ public class JSONParser {
 	 * java.lang.Number,
 	 * java.lang.Boolean,
 	 * null
-	 * @throws IOException
-	 * @throws ParseException
+	 * @throws IOException    Something went wrong
+	 * @throws ParseException Something went wrong
 	 */
 	public Object parse(Reader in, ContainerFactory containerFactory) throws IOException, ParseException {
 		reset(in);
@@ -306,13 +304,13 @@ public class JSONParser {
 	/**
 	 * Stream processing of JSON text.
 	 *
-	 * @param in
-	 * @param contentHandler
+	 * @param in input
+	 * @param contentHandler contentHandler
 	 * @param isResume       - Indicates if it continues previous parsing operation.
 	 *                       If set to true, resume parsing the old stream, and parameter 'in' will be ignored.
 	 *                       If this method is called for the first time in this instance, isResume will be ignored.
-	 * @throws IOException
-	 * @throws ParseException
+	 * @throws IOException    Something went wrong
+	 * @throws ParseException Something went wrong
 	 * @see ContentHandler
 	 */
 	public void parse(Reader in, ContentHandler contentHandler, boolean isResume) throws IOException, ParseException {

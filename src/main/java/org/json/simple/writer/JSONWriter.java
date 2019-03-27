@@ -247,6 +247,8 @@ public class JSONWriter {
 	 *
 	 * @param collection source collection
 	 * @param out        output writer
+	 * @param <T>        collection items type
+	 * @throws IOException Something went wrong
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <T> void writeJSONString(Collection<T> collection, Writer out) throws IOException {
@@ -260,6 +262,8 @@ public class JSONWriter {
 	 * @param collection source collection
 	 * @param out        output writer
 	 * @param dateFormat format for converting dates to string
+	 * @param <T>        collection items type
+	 * @throws IOException Something went wrong
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <T> void writeJSONString(Collection<T> collection, Writer out, DateFormat dateFormat) throws IOException {
@@ -296,6 +300,9 @@ public class JSONWriter {
 	 *
 	 * @param map source map
 	 * @param out output writer
+	 * @param <K> map keys type
+	 * @param <V> map values type
+	 * @throws IOException Something went wrong
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <K, V> void writeJSONString(Map<K, V> map, Writer out) throws IOException {
@@ -310,6 +317,9 @@ public class JSONWriter {
 	 * @param map        source map
 	 * @param out        output writer
 	 * @param dateFormat format for converting dates to string
+	 * @param <K>        map keys type
+	 * @param <V>        map values type
+	 * @throws IOException Something went wrong
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer, DateFormat)
 	 */
 	public static <K, V> void writeJSONString(Map<K, V> map, Writer out, DateFormat dateFormat) throws IOException {

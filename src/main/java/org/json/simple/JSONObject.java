@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
  *
- * @author FangYidong<fangyidong @ yahoo.com.cn>
+ * @author FangYidong
  */
 public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAware, JSONStreamAware, Serializable {
 
@@ -49,7 +49,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 * Allows creation of a JSONObject from a Map. After that, both the
 	 * generated JSONObject and the Map can be modified independently.
 	 *
-	 * @param map
+	 * @param map the map whose mappings are to be placed in this map
 	 */
 	public JSONObject(Map<K, V> map) {
 		super(map);
