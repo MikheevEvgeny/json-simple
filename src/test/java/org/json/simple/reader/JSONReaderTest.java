@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 import java.util.Date;
 
+@SuppressWarnings("ConstantConditions")
 public class JSONReaderTest extends TestCase {
 	public void testRead() {
 		final JSONObject<String, Object> jsonObject0 = new JSONObject<>();

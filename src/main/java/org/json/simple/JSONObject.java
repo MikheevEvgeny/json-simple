@@ -73,9 +73,10 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 * @param <T>          result type
 	 * @return if exists value otherwise defaultValue
 	 */
-	public <T> T get(Object key, T defaultValue) {
+	@SuppressWarnings("unchecked")
+	public <T extends V> T get(K key, T defaultValue) {
 		try {
-			return (T) super.getOrDefault(key, (V) defaultValue);
+			return (T) super.getOrDefault(key, defaultValue);
 		} catch (Exception e) {
 			return defaultValue;
 		}

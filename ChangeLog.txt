@@ -1,5 +1,8 @@
 ChangeLog
-Version 1.2.1 (2019/03/27)
+Version 1.2.3 (2019/04/04)
+* Small improvements
+
+Version 1.2.2 (2019/03/27)
 * Added universal read method to JSONReader
 * Bug fixes
 
