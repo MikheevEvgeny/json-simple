@@ -82,6 +82,118 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 		}
 	}
 
+	/**
+	 * Try to get value and cast it to String. On any failure returns empty String
+	 *
+	 * @param key key
+	 * @return String value or empty sting on failure
+	 */
+	public String getString(K key) {
+		try {
+			return (String) super.get(key);
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to int. On any failure returns 0
+	 *
+	 * @param key key
+	 * @return int value or 0 on failure
+	 */
+	public int getInt(K key) {
+		try {
+			return (Integer) super.get(key);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to Integer. On any failure returns 0
+	 *
+	 * @param key key
+	 * @return Integer value or 0 on failure
+	 */
+	public Integer getInteger(K key) {
+		try {
+			return (Integer) super.get(key);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to Long. On any failure returns 0
+	 *
+	 * @param key key
+	 * @return Long value or 0 on failure
+	 */
+	public Long getLong(K key) {
+		try {
+			return (Long) super.get(key);
+		} catch (Exception e) {
+			return 0L;
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to Float. On any failure returns 0
+	 *
+	 * @param key key
+	 * @return Float value or 0 on failure
+	 */
+	public Float getFloat(K key) {
+		try {
+			return (Float) super.get(key);
+		} catch (Exception e) {
+			return 0f;
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to Double. On any failure returns 0
+	 *
+	 * @param key key
+	 * @return Double value or 0 on failure
+	 */
+	public Double getDouble(K key) {
+		try {
+			return (Double) super.get(key);
+		} catch (Exception e) {
+			return 0d;
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to JSONObject. On any failure empty JSONObject
+	 *
+	 * @param key key
+	 * @return value as JSONObject or empty JSONObject on failure
+	 */
+	public JSONObject getJSONObject(K key) {
+		try {
+			return (JSONObject) super.get(key);
+		} catch (Exception e) {
+			return new JSONObject();
+		}
+	}
+
+	/**
+	 * Try to get value and cast it to JSONArray. On any failure empty JSONArray
+	 *
+	 * @param key key
+	 * @return value as JSONArray or empty JSONArray on failure
+	 */
+	public JSONArray getJSONArray(K key) {
+		try {
+			return (JSONArray) super.get(key);
+		} catch (Exception e) {
+			return new JSONArray();
+		}
+	}
+
 	public void writeJSONString(Writer out) throws IOException {
 		JSONWriter.writeJSONString(this, out);
 	}
