@@ -325,4 +325,8 @@ public class JSONValue {
 	public static void setDefaultDateFormat(DateFormat defaultDateFormat) {
 		DEFAULT_DATE_FORMAT = defaultDateFormat;
 	}
+
+	public static DateFormat getDefaultDateFormat() {
+		return DEFAULT_DATE_FORMAT;
+	}
 }

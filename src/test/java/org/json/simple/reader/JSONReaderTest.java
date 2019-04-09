@@ -7,6 +7,9 @@ import org.json.simple.JSONObject;
 
 import java.util.Date;
 
+/**
+ * @author Mikheev Evgeny
+ */
 @SuppressWarnings("ConstantConditions")
 public class JSONReaderTest extends TestCase {
 	public void testRead() {
