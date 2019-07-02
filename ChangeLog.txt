@@ -1,4 +1,8 @@
 ChangeLog
+
+Version 1.2.5 (2019/07/02)
+* NullPointer fix
+
 Version 1.2.4 (2019/07/02)
 * Added write/read support for java.time.Instant, import java.time.LocalDateTime, java.time.ZonedDateTime
 

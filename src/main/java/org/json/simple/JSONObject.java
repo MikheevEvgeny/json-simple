@@ -90,7 +90,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public String getString(K key) {
 		try {
-			return (String) super.get(key);
+			return super.get(key) == null ? (String) super.get(key) : "";
 		} catch (Exception e) {
 			return "";
 		}
@@ -104,7 +104,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public int getInt(K key) {
 		try {
-			return (Integer) super.get(key);
+			return super.get(key) == null ? (Integer) super.get(key) : 0;
 		} catch (Exception e) {
 			return 0;
 		}
@@ -118,7 +118,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public Integer getInteger(K key) {
 		try {
-			return (Integer) super.get(key);
+			return super.get(key) == null ? (Integer) super.get(key) : 0;
 		} catch (Exception e) {
 			return 0;
 		}
@@ -132,7 +132,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public Long getLong(K key) {
 		try {
-			return (Long) super.get(key);
+			return super.get(key) == null ? (Long) super.get(key) : 0L;
 		} catch (Exception e) {
 			return 0L;
 		}
@@ -146,7 +146,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public Float getFloat(K key) {
 		try {
-			return (Float) super.get(key);
+			return super.get(key) == null ? (Float) super.get(key) : 0f;
 		} catch (Exception e) {
 			return 0f;
 		}
@@ -160,7 +160,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public Double getDouble(K key) {
 		try {
-			return (Double) super.get(key);
+			return super.get(key) == null ? (Double) super.get(key) : 0d;
 		} catch (Exception e) {
 			return 0d;
 		}
@@ -174,7 +174,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public JSONObject getJSONObject(K key) {
 		try {
-			return (JSONObject) super.get(key);
+			return super.get(key) == null ? (JSONObject) super.get(key) : new JSONObject();
 		} catch (Exception e) {
 			return new JSONObject();
 		}
@@ -188,7 +188,7 @@ public class JSONObject<K, V> extends HashMap<K, V> implements Map<K, V>, JSONAw
 	 */
 	public JSONArray getJSONArray(K key) {
 		try {
-			return (JSONArray) super.get(key);
+			return super.get(key) == null ? (JSONArray) super.get(key) : new JSONArray();
 		} catch (Exception e) {
 			return new JSONArray();
 		}
