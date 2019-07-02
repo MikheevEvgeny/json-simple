@@ -5,6 +5,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -12,6 +15,7 @@ import java.util.Date;
  */
 @SuppressWarnings("ConstantConditions")
 public class JSONReaderTest extends TestCase {
+
 	public void testRead() {
 		final JSONObject<String, Object> jsonObject0 = new JSONObject<>();
 		final JSONObject<String, Object> jsonObject1 = new JSONObject<>();
@@ -68,5 +72,33 @@ public class JSONReaderTest extends TestCase {
 
 		JSONAware testArray3 = JSONReader.read(jsonArray3.toJSONString());
 		assertEquals(jsonArray3.toJSONString(), testArray3.toJSONString());
+	}
+
+	public void testJava8DateTime() {
+		final JSONObject<String, Object> jsonObject = new JSONObject<>();
+		final JSONArray<Object> jsonArray = new JSONArray<>();
+
+		jsonObject.put("inst", Instant.now());
+		jsonObject.put("ldt", LocalDateTime.now());
+		jsonObject.put("zdt", ZonedDateTime.now());
+		jsonObject.put("int", 123);
+		jsonObject.put("double", 123.44);
+		jsonObject.put("bool", 3);
+		jsonObject.put("sad", "fdafdasfdasfs");
+		jsonObject.put("sfdsafad", "fdafdasfdasfs");
+		jsonObject.put("safdasfdsad", "fdafdasfdsafdsafdasfs");
+		jsonObject.put("safdsad", "fdafdasfdasfs");
+		jsonObject.put("sfdsaad", "fdafdasfdasfs");
+		jsonObject.put("sfdsaasafsafsd", "fdafdasfdasfs");
+		jsonObject.put("sfdsafewgasafsafsd", "fdafdasfdasfs");
+		jsonObject.put("fas43tsgfgsdgsdfsd", "fdafdasfdasfs");
+
+		jsonArray.add(Instant.now());
+		jsonArray.add(LocalDateTime.now());
+		jsonArray.add(ZonedDateTime.now());
+
+		assertEquals(jsonObject.toJSONString(), JSONReader.read(jsonObject.toString()).toJSONString());
+
+		assertEquals(jsonArray.toJSONString(), JSONReader.read(jsonArray.toString()).toJSONString());
 	}
 }

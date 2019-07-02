@@ -2,6 +2,10 @@
 
 package org.json.simple.parser;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 class Yylex {
 
 	/**
@@ -595,7 +599,17 @@ class Yylex {
 					break;
 				case 13: {
 					yybegin(YYINITIAL);
-					return new Yytoken(Yytoken.TYPE_VALUE, sb.toString());
+					String data = sb.toString();
+					if (data.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(.*)$")) {
+						if (data.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$")) {
+							return new Yytoken(Yytoken.TYPE_VALUE, Instant.parse(data));
+						} else if (data.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}$")) {
+							return new Yytoken(Yytoken.TYPE_VALUE, LocalDateTime.parse(data));
+						} else if (data.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}[+-]\\d{2}:\\d{2}\\[(.*)/(.*)\\]$")) {
+							return new Yytoken(Yytoken.TYPE_VALUE, ZonedDateTime.parse(data));
+						}
+					}
+					return new Yytoken(Yytoken.TYPE_VALUE, data);
 				}
 				case 31:
 					break;

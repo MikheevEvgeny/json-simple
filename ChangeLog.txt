@@ -1,4 +1,7 @@
 ChangeLog
+Version 1.2.4 (2019/07/02)
+* Added write/read support for java.time.Instant, import java.time.LocalDateTime, java.time.ZonedDateTime
+
 Version 1.2.3 (2019/04/04)
 * Added getter in JSONObject
 * Small improvements

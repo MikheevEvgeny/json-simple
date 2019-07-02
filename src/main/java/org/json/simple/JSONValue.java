@@ -7,6 +7,9 @@ import org.json.simple.writer.JSONWriter;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
@@ -125,6 +128,13 @@ public class JSONValue {
 		if (value instanceof Date) {
 			out.write('\"');
 			out.write(escape(dateFormat != null ? dateFormat.format(value) : DEFAULT_DATE_FORMAT.format(value)));
+			out.write('\"');
+			return;
+		}
+
+		if (value instanceof Instant || value instanceof LocalDateTime || value instanceof ZonedDateTime) {
+			out.write('\"');
+			out.write(escape(value.toString()));
 			out.write('\"');
 			return;
 		}
