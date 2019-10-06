@@ -4,7 +4,7 @@
 	<artifactId>json-simple</artifactId>
 	<packaging>bundle</packaging>
 	<name>JSON.simple</name>
-	<version>1.2.5</version>
+	<version>1.2.6</version>
 	<description>A simple Java toolkit for JSON</description>
 	<url>http://code.google.com/p/json-simple/</url>
 	<licenses>
@@ -33,8 +33,8 @@
 			<timezone>+3</timezone>
 		</developer>
 		<developer>
-			<id>Gourjev</id>
-			<name>Dmitry Gourjev</name>
+			<id>Gouriev</id>
+			<name>Dmitry Gouriev</name>
 			<roles>
 				<role>architect</role>
 				<role>developer</role>

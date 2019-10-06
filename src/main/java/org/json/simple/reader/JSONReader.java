@@ -66,7 +66,7 @@ public class JSONReader {
 	public static <T> JSONArray<T> readArray(String string, boolean nullOnFail) {
 		try {
 			return (JSONArray<T>) JSONValue.parseWithException(string);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			if (nullOnFail) {
 				return null;
 			} else {
@@ -99,7 +99,7 @@ public class JSONReader {
 	public static <K, V> JSONObject<K, V> readObject(String string, boolean nullOnFail) {
 		try {
 			return (JSONObject<K, V>) JSONValue.parseWithException(string);
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			if (nullOnFail) {
 				return null;
 			} else {
