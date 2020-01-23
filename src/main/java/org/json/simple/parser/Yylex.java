@@ -686,7 +686,12 @@ class Yylex {
 					break;
 				case 2: {
 					Long val = Long.valueOf(yytext());
-					return new Yytoken(Yytoken.TYPE_VALUE, val);
+					if (val >= Integer.MIN_VALUE && val <= Integer.MAX_VALUE) {
+						return new Yytoken(Yytoken.TYPE_VALUE, val.intValue());
+					} else {
+						return new Yytoken(Yytoken.TYPE_VALUE, val);
+					}
+
 				}
 				case 45:
 					break;

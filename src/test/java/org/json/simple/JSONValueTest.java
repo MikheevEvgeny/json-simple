@@ -1,13 +1,13 @@
 package org.json.simple;
 
+import junit.framework.TestCase;
+
 import java.io.IOException;
 import java.io.StringWriter;
 
-import junit.framework.TestCase;
-
 public class JSONValueTest extends TestCase {
 	public void testByteArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((byte[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new byte[0]));
 		assertEquals("[12]", JSONValue.toJSONString(new byte[]{12}));
 		assertEquals("[-7,22,86,-99]", JSONValue.toJSONString(new byte[]{-7, 22, 86, -99}));
@@ -15,7 +15,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((byte[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -32,7 +32,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testShortArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((short[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new short[0]));
 		assertEquals("[12]", JSONValue.toJSONString(new short[]{12}));
 		assertEquals("[-7,22,86,-99]", JSONValue.toJSONString(new short[]{-7, 22, 86, -99}));
@@ -40,7 +40,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((short[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -57,7 +57,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testIntArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((int[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new int[0]));
 		assertEquals("[12]", JSONValue.toJSONString(new int[]{12}));
 		assertEquals("[-7,22,86,-99]", JSONValue.toJSONString(new int[]{-7, 22, 86, -99}));
@@ -65,7 +65,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((int[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -82,7 +82,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testLongArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((long[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new long[0]));
 		assertEquals("[12]", JSONValue.toJSONString(new long[]{12}));
 		assertEquals("[-7,22,9223372036854775807,-99]", JSONValue.toJSONString(new long[]{-7, 22, 9223372036854775807L, -99}));
@@ -90,7 +90,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((long[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -107,7 +107,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testFloatArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((float[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new float[0]));
 		assertEquals("[12.8]", JSONValue.toJSONString(new float[]{12.8f}));
 		assertEquals("[-7.1,22.234,86.7,-99.02]", JSONValue.toJSONString(new float[]{-7.1f, 22.234f, 86.7f, -99.02f}));
@@ -115,7 +115,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((float[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -132,7 +132,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testDoubleArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((double[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new double[0]));
 		assertEquals("[12.8]", JSONValue.toJSONString(new double[]{12.8}));
 		assertEquals("[-7.1,22.234,86.7,-99.02]", JSONValue.toJSONString(new double[]{-7.1, 22.234, 86.7, -99.02}));
@@ -140,7 +140,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((double[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -157,7 +157,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testBooleanArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((boolean[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new boolean[0]));
 		assertEquals("[true]", JSONValue.toJSONString(new boolean[]{true}));
 		assertEquals("[true,false,true]", JSONValue.toJSONString(new boolean[]{true, false, true}));
@@ -165,7 +165,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((boolean[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -182,7 +182,7 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testCharArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((char[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new char[0]));
 		assertEquals("[\"a\"]", JSONValue.toJSONString(new char[]{'a'}));
 		assertEquals("[\"a\",\"b\",\"c\"]", JSONValue.toJSONString(new char[]{'a', 'b', 'c'}));
@@ -190,7 +190,7 @@ public class JSONValueTest extends TestCase {
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((char[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -207,15 +207,15 @@ public class JSONValueTest extends TestCase {
 	}
 
 	public void testObjectArrayToString() throws IOException {
-		assertEquals("null", JSONValue.toJSONString((Object[]) null));
+		assertEquals("null", JSONValue.toJSONString(null));
 		assertEquals("[]", JSONValue.toJSONString(new Object[0]));
 		assertEquals("[\"Hello\"]", JSONValue.toJSONString(new Object[]{"Hello"}));
-		assertEquals("[\"Hello\",12,[1,2,3]]", JSONValue.toJSONString(new Object[]{"Hello", new Integer(12), new int[]{1, 2, 3}}));
+		assertEquals("[\"Hello\",12,[1,2,3]]", JSONValue.toJSONString(new Object[]{"Hello", 12, new int[]{1, 2, 3}}));
 
 		StringWriter writer;
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString((Object[]) null, writer);
+		JSONValue.writeJSONString(null, writer);
 		assertEquals("null", writer.toString());
 
 		writer = new StringWriter();
@@ -227,7 +227,7 @@ public class JSONValueTest extends TestCase {
 		assertEquals("[\"Hello\"]", writer.toString());
 
 		writer = new StringWriter();
-		JSONValue.writeJSONString(new Object[]{"Hello", new Integer(12), new int[]{1, 2, 3}}, writer);
+		JSONValue.writeJSONString(new Object[]{"Hello", 12, new int[]{1, 2, 3}}, writer);
 		assertEquals("[\"Hello\",12,[1,2,3]]", writer.toString());
 	}
 

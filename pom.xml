@@ -4,8 +4,9 @@
 	<artifactId>json-simple</artifactId>
 	<packaging>bundle</packaging>
 	<name>JSON.simple</name>
-	<version>1.2.6</version>
 	<description>A simple Java toolkit for JSON</description>
+	<version>1.2.7</version>
+
 	<url>http://code.google.com/p/json-simple/</url>
 	<licenses>
 		<license>
