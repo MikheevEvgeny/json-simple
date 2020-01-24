@@ -1,5 +1,15 @@
 ChangeLog
 
+Version 1.2.7 (2020/01/24)
+* Now Long casts to Integer if it fits into
+* Try to cast numeric list to single type (list of Integer, Long or Double)
+
+Version 1.2.6 (2019/10/06 )
+* Uncaught exceptions fix
+
+Version 1.2.5 (2019/07/02)
+* NullPointer fix
+
 Version 1.2.5 (2019/07/02)
 * NullPointer fix
 

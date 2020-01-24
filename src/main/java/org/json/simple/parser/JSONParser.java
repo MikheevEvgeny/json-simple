@@ -13,6 +13,7 @@ import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -90,7 +91,7 @@ public class JSONParser {
 	/**
 	 * Parse JSON text into java object from the input source.
 	 *
-	 * @param in input
+	 * @param in               input
 	 * @param containerFactory - Use this factory to createyour own JSON object and JSON array containers.
 	 * @return Instance of the following:
 	 * org.json.simple.JSONObject,
@@ -209,8 +210,40 @@ public class JSONParser {
 							case Yytoken.TYPE_COMMA:
 								break;
 							case Yytoken.TYPE_VALUE:
-								List val = (List) valueStack.getFirst();
-								val.add(token.value);
+								List listValue = (List) valueStack.getFirst();
+								listValue.add(token.value);
+								String type = null;
+								for (Object o : listValue) {
+									String currType;
+									if (o instanceof Integer) {
+										currType = "Integer";
+									} else if (o instanceof Long) {
+										currType = "Long";
+									} else if (o instanceof Double) {
+										currType = "Double";
+									} else {
+										currType = "Other";
+										type = currType;
+										break;
+									}
+									if (type == null) {
+										type = currType;
+									} else if ("Long".equals(currType) && "Integer".equals(type)) {
+										type = currType;
+									} else if ("Double".equals(currType) && ("Integer".equals(type) || "Long".equals(type))) {
+										type = currType;
+									}
+								}
+								if ("Long".equals(type)) {
+									for (int i = 0; i < listValue.size(); i++) {
+										listValue.set(i, Long.valueOf(listValue.get(i).toString()));
+									}
+								} else if ("Double".equals(type)) {
+									for (int i = 0; i < listValue.size(); i++) {
+										listValue.set(i, Double.valueOf(listValue.get(i).toString()));
+									}
+								}
+
 								break;
 							case Yytoken.TYPE_RIGHT_SQUARE:
 								if (valueStack.size() > 1) {
@@ -222,17 +255,17 @@ public class JSONParser {
 								}
 								break;
 							case Yytoken.TYPE_LEFT_BRACE:
-								val = (List) valueStack.getFirst();
+								listValue = (List) valueStack.getFirst();
 								Map newObject = createObjectContainer(containerFactory);
-								val.add(newObject);
+								listValue.add(newObject);
 								status = S_IN_OBJECT;
 								statusStack.addFirst(status);
 								valueStack.addFirst(newObject);
 								break;
 							case Yytoken.TYPE_LEFT_SQUARE:
-								val = (List) valueStack.getFirst();
+								listValue = (List) valueStack.getFirst();
 								List newArray = createArrayContainer(containerFactory);
-								val.add(newArray);
+								listValue.add(newArray);
 								status = S_IN_ARRAY;
 								statusStack.addFirst(status);
 								valueStack.addFirst(newArray);
@@ -304,7 +337,7 @@ public class JSONParser {
 	/**
 	 * Stream processing of JSON text.
 	 *
-	 * @param in input
+	 * @param in             input
 	 * @param contentHandler contentHandler
 	 * @param isResume       - Indicates if it continues previous parsing operation.
 	 *                       If set to true, resume parsing the old stream, and parameter 'in' will be ignored.
