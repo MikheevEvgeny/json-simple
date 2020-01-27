@@ -5,7 +5,7 @@
 	<packaging>bundle</packaging>
 	<name>JSON.simple</name>
 	<description>A simple Java toolkit for JSON</description>
-	<version>1.2.7</version>
+	<version>1.2.8</version>
 
 	<url>http://code.google.com/p/json-simple/</url>
 	<licenses>

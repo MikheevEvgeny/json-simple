@@ -132,5 +132,16 @@ public class YylexTest extends TestCase {
 		String list6Str = JSONWriter.toJSONString(list6);
 		Object list6Read = JSONReader.readArray(list6Str);
 		assertEquals(list6Read, list6);
+
+		JSONObject<String, Object> object1 = new JSONObject<String, Object>() {{
+			put("I", 1);
+			put("L", 1000L + Integer.MAX_VALUE);
+			put("D1", 1000.43);
+			put("D2", 1000D + Integer.MAX_VALUE);
+
+		}};
+		String object1Str = JSONWriter.toJSONString(object1);
+		Object object1Read = JSONReader.readObject(object1Str);
+		assertEquals(object1Read, object1);
 	}
 }

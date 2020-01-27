@@ -84,7 +84,7 @@ public class JSONReader {
 	 * @return JSONObject if parsing successed, null otherwise
 	 */
 	public static <K, V> JSONObject<K, V> readObject(String string) {
-		return readObject(string);
+		return readObject(string, false);
 	}
 
 	/**

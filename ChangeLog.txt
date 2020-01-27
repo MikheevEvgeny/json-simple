@@ -1,5 +1,8 @@
 ChangeLog
 
+Version 1.2.8 (2020/01/27)
+* Stack overflow fix in readObject
+
 Version 1.2.7 (2020/01/24)
 * Now Long casts to Integer if it fits into
 * Try to cast numeric list to single type (list of Integer, Long or Double)
